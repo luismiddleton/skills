@@ -1,0 +1,82 @@
+[
+  {
+    "query": "Help me write a prompt for Antigravity to refactor `src/auth/session.ts` without breaking existing cookie tests.",
+    "should_trigger": true
+  },
+  {
+    "query": "How should I ask the AI to summarize customer support tickets into bug reports without making things up?",
+    "should_trigger": true
+  },
+  {
+    "query": "Why does Claude keep ignoring my formatting rules and outputting markdown tables anyway? Here's my current prompt.",
+    "should_trigger": true
+  },
+  {
+    "query": "Draft a `GEMINI.md` file for our Next.js + pnpm monorepo so agents stop using npm and always run typecheck.",
+    "should_trigger": true
+  },
+  {
+    "query": "Review my `AGENTS.md` for Codex CLI—agents keep stalling or repeating what's already in `package.json`.",
+    "should_trigger": true
+  },
+  {
+    "query": "My `CLAUDE.md` is 450 lines long and Claude Code misses the important rules. Help me trim and structure it.",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you craft a prompt I can reuse for writing weekly executive status updates from raw Jira exports?",
+    "should_trigger": true
+  },
+  {
+    "query": "Design a few-shot prompt to classify incoming webhook payloads into our 5 billing event categories as strict JSON.",
+    "should_trigger": true
+  },
+  {
+    "query": "Turn this rough idea into a multi-step system prompt for an agent that triages GitHub issues.",
+    "should_trigger": true
+  },
+  {
+    "query": "Make this prompt better: 'fix the checkout bug and make the code cleaner'.",
+    "should_trigger": true
+  },
+  {
+    "query": "Write an email to our enterprise customers announcing our SOC 2 Type II certification and 30-day SSO migration window.",
+    "should_trigger": false
+  },
+  {
+    "query": "Fix the horizontal overflow on the search results table below 480px in `src/styles/search.scss` and run `pnpm test search`.",
+    "should_trigger": false
+  },
+  {
+    "query": "Read `AGENTS.md` and `CLAUDE.md` in this repo and summarize our test and linting commands.",
+    "should_trigger": false
+  },
+  {
+    "query": "Extract `severity`, `affected_service`, and `follow_up_actions` as JSON from this Slack postmortem thread.",
+    "should_trigger": false
+  },
+  {
+    "query": "Run Codex CLI on `packages/billing` to migrate the Stripe webhook handler to v14.",
+    "should_trigger": false
+  },
+  {
+    "query": "Why is my Python script throwing a `KeyError` when parsing `config.yaml`? Here is the traceback.",
+    "should_trigger": false
+  },
+  {
+    "query": "Create a reusable HTML email template in `src/templates/welcome.html` for new user onboarding.",
+    "should_trigger": false
+  },
+  {
+    "query": "Follow the instructions in `GEMINI.md` to scaffold a new API route in `src/routes/users.ts`.",
+    "should_trigger": false
+  },
+  {
+    "query": "Compare Claude Sonnet and GPT-4o context window limits and pricing for our architecture doc.",
+    "should_trigger": false
+  },
+  {
+    "query": "Check if `SKILL.md` in `skills/okf/` has valid YAML frontmatter.",
+    "should_trigger": false
+  }
+]
