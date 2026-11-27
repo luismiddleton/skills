@@ -1,0 +1,35 @@
+{
+  "skill_name": "prompt-crafting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "can you help me write a prompt for antigravity? i want it to add cursor-based pagination to our `/api/invoices` endpoint in `src/routes/invoices.ts` using our existing helper in `src/lib/pagination.ts`, keep the existing response fields backwards-compatible, and make sure tests pass with `pnpm test invoices`.",
+      "expected_output": "Uses the Output Template (`### Tailored Prompt`, `### Why This Works`, `### Optional Refinements`) with the Antigravity 4-Part Spec (Goal, Scope & Inputs, Constraints, Verification) inside a fenced code block. Includes exact file paths (`src/routes/invoices.ts`, `src/lib/pagination.ts`), backwards-compatibility constraint, and `pnpm test invoices` verification, while omitting CRAFT Role/Tone fluff.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need a prompt I can give an LLM to draft an announcement email to our enterprise customers about our upcoming SOC 2 Type II certification and new SSO enforcement timeline. We want our Customer Success lead voice—reassuring, clear on the 30-day migration window, and formatted with a subject line, a short summary, and bulleted action steps.",
+      "expected_output": "Uses the Output Template with the CRAFT framework (Context, Role, Action, Format, Target / Tone) inside a self-contained copyable fenced code block. Clearly specifies the Customer Success lead persona, enterprise customer audience, reassuring and clear tone, 30-day SSO migration window, and exact output structure (subject line, short summary, bulleted action steps).",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "i'm setting up an `AGENTS.md` for Codex CLI in our monorepo at `packages/billing/AGENTS.md`. right now my draft just lists our TypeScript version, the folder tree, and tells Codex 'first output a detailed step-by-step plan and give frequent status updates before editing anything'. can you rewrite it so Codex actually works well with it?",
+      "expected_output": "Applies Codex CLI and `AGENTS.md` hygiene rules from `references/harness-patterns.md`: removes info discoverable from `package.json`/config (TypeScript version, folder tree), removes the upfront planning chatter and frequent status update directive (which wastes tokens and risks premature halts), keeps only non-obvious setup/architectural invariants and verification protocols, and explains these changes in `### Why This Works`.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Design a prompt for Claude to extract structured incident metadata (`severity` P0-P3, `affected_service`, `root_cause_category`, `customer_impact_minutes`, `follow_up_actions`) as strict JSON from messy Slack postmortem threads. It must return `null` for missing fields rather than guessing, and follow a consistent taxonomy.",
+      "expected_output": "Applies `references/frameworks.md` (Few-Shot and/or RISEN/Structured Reasoning) and `references/harness-patterns.md` (Claude patterns): wraps input data in semantic XML tags (e.g., `<thread>`) placed before instructions, includes 3-5 diverse `<example>` blocks (including an edge case with missing fields returning `null`), and states *why* constraints exist (e.g., returning `null` rather than guessing so downstream systems do not record fabricated metrics), formatted in the Output Template.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Make a prompt for my AI assistant to review our stuff and make it way better before Friday.",
+      "expected_output": "Follows Section 1 (Ask vs. Draft Directly): recognizes that the goal, target artifact/domain ('our stuff'), target model/harness, and success criteria are underspecified, and asks 2-3 targeted clarifying questions rather than guessing blindly or generating a long questionnaire.",
+      "files": []
+    }
+  ]
+}
