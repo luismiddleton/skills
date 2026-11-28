@@ -1,14 +1,16 @@
 ---
 name: diagram-crafting
-description: >
-  Create, convert, and validate technical diagrams across Mermaid, Obsidian
-  .canvas, and standalone interactive HTML (via Archify). Use when drawing
-  flowcharts, mapping codebases, or visualizing system architectures, workflows,
-  API sequences, data flows, state lifecycles, ERDs, class models, module trees,
-  proportional timelines, latency waterfalls, converting Mermaid into Obsidian
-  .canvas with dual-view > [!NOTE]- callouts, or building one-page HTML
-  explainers. Not for live telemetry dashboards, numeric data charts/plots, UI
-  wireframes, or raster image generation.
+description: >-
+  Create, convert, validate, and fix diagrams across Mermaid (inline Markdown),
+  Obsidian .canvas, and standalone interactive HTML (routed via Archify). Use
+  when drawing flowcharts, mapping out codebases, or visualizing how systems
+  or workflows work—including API sequences, data flows, state lifecycles,
+  database schemas (ERDs), class models, module trees, timelines, and request
+  waterfalls; converting/upgrading Mermaid to .canvas (collapsible backups) or
+  HTML; fixing broken .canvas layouts; or turning docs into flows or one-page
+  HTML explainers. Not for live monitoring dashboards, numeric data
+  charts/plots, UI mockups/wireframes, icons/raster images, or knowledge-graph
+  audits/vault organization.
 ---
 
 # Diagram Crafting (`diagram-crafting`)
