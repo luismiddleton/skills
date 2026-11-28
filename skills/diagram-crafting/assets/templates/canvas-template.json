@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "node-1",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 140,
+      "type": "text",
+      "text": "### Step 1: Ingress\nInitial request enters the system",
+      "color": "5"
+    },
+    {
+      "id": "node-2",
+      "x": 520,
+      "y": 0,
+      "width": 320,
+      "height": 140,
+      "type": "text",
+      "text": "### Step 2: Processing\nCore compute tier performs evaluation",
+      "color": "4"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1-2",
+      "fromNode": "node-1",
+      "fromSide": "right",
+      "toNode": "node-2",
+      "toSide": "left",
+      "label": "Routes HTTPS traffic"
+    }
+  ]
+}

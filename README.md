@@ -6,6 +6,7 @@ A collection of reusable [Agent Skills](https://agentskills.io/) for AI coding a
 
 | Skill | Description | Location |
 | :--- | :--- | :--- |
+| `diagram-crafting` | Create, convert, and validate diagrams across Mermaid, Obsidian `.canvas`, and Archify interactive HTML | [`skills/diagram-crafting/`](./skills/diagram-crafting/SKILL.md) |
 | `prompt-crafting` | Craft, critique, and tailor prompts using Antigravity, CRAFT, and harness-specific patterns | [`skills/prompt-crafting/`](./skills/prompt-crafting/SKILL.md) |
 
 ## Installing Skills

@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {
+      "id": "node-a",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 80,
+      "text": "# Service A\nHandles ingress\nLine 2\nLine 3"
+    },
+    {
+      "id": "node-b",
+      "type": "text",
+      "x": 420,
+      "y": 0,
+      "width": 320,
+      "height": 180,
+      "text": "# Service B\nProcesses requests"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "node-a",
+      "fromSide": "right",
+      "toNode": "node-b",
+      "toSide": "left",
+      "label": "Calls API"
+    }
+  ]
+}

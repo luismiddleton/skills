@@ -1,0 +1,72 @@
+[
+  {
+    "query": "Convert this Mermaid flowchart into an Obsidian .canvas file and embed it with a collapsible backup.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Draw an interactive standalone HTML architecture diagram of our VPC and ECS services with dark/light theme and SVG export.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Create a Mermaid sequenceDiagram showing how our API gateway authenticates JWT tokens with Cognito.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Visualize this 14-table multi-domain Postgres schema as a dense ERD in HTML.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Make a waterfall diagram showing span durations and overlap for our checkout request.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Turn this incident postmortem into a one-page HTML explainer I can share with the team.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Validate docs/architecture.canvas to make sure none of the cards clip text or collide with edge labels.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Map out our repository's module hierarchy as a tree diagram.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Build a Grafana dashboard JSON for monitoring Kubernetes pod CPU and memory usage.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Plot a bar chart of monthly revenue by region using matplotlib.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Organize my Obsidian vault notes into top-level folders without creating any diagrams.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Create an SVG icon set for our navigation bar.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Generate a photorealistic hero banner image for our landing page.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Help me craft a system prompt for Claude to review pull requests.",
+    "should_trigger": false,
+    "split": "val"
+  }
+]
