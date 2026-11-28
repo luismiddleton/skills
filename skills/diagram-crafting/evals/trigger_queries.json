@@ -1,0 +1,122 @@
+[
+  {
+    "query": "Convert this Mermaid flowchart into an Obsidian .canvas file and embed it with a collapsible backup.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Draw an interactive standalone HTML architecture diagram of our VPC and ECS services with dark/light theme and SVG export.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Create a Mermaid sequenceDiagram showing how our API gateway authenticates JWT tokens with Cognito.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Visualize this 14-table multi-domain Postgres schema as a dense ERD in HTML.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Draw a diagram showing how a user login request moves from the browser through our auth service to Postgres.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Fix docs/system.canvas—cards are cutting off text and arrow labels overlap.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Inspect src/payments/ and visualize how webhooks, retries, and ledger writes connect.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Map out the tables and foreign keys in db/schema.sql so I can see how orders link to users.",
+    "should_trigger": true,
+    "split": "train"
+  },
+  {
+    "query": "Make a waterfall diagram showing span durations and overlap for our checkout request.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Turn this incident postmortem into a one-page HTML explainer I can share with the team.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Validate docs/architecture.canvas to make sure none of the cards clip text or collide with edge labels.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Map out our repository's module hierarchy as a tree diagram.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Upgrade this Mermaid sequence diagram into a standalone interactive HTML diagram with theme switching.",
+    "should_trigger": true,
+    "split": "val"
+  },
+  {
+    "query": "Build a Grafana dashboard JSON for monitoring Kubernetes pod CPU and memory usage.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Plot a bar chart of monthly revenue by region using matplotlib.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Organize my Obsidian vault notes into top-level folders without creating any diagrams.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Run okf graph docs/concepts to audit bidirectional links, orphaned notes, and status lifecycles.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Build a Recharts line chart component showing daily active users over the last 90 days.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Create a Datadog dashboard monitor tracking checkout p95 latency and error rates.",
+    "should_trigger": false,
+    "split": "train"
+  },
+  {
+    "query": "Create an SVG icon set for our navigation bar.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Generate a photorealistic hero banner image for our landing page.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Help me craft a system prompt for Claude to review pull requests.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Design a UI mockup and interactive HTML wireframe for our SaaS billing settings page.",
+    "should_trigger": false,
+    "split": "val"
+  },
+  {
+    "query": "Add YAML frontmatter tags and wikilinks across my Obsidian project notes.",
+    "should_trigger": false,
+    "split": "val"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "skill_name": "diagram-crafting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Convert our deployment Mermaid flowchart into an Obsidian .canvas file at `docs/deploy.canvas` and add a dual-view embed to `docs/deploy.md`.",
+      "expected_output": "Selects Obsidian .canvas (Stage 1), reads `references/canvas-schema.md` and `references/mermaid-patterns.md`, computes node heights with the formula, enforces >=180px horizontal / >=70px vertical labeled edge clearance, uses native `> [!CANVAS]` and `> [!NOTE]-` (no `<details>` tags), and validates with `scripts/validate_canvas.py`.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Create an interactive standalone HTML architecture diagram of this repository's auth flow with dark/light theme and SVG export.",
+      "expected_output": "Selects Archify `architecture` mode (Stage 1 & Stage 2 triggers: standalone HTML, theme toggle, SVG export, repo evidence), loads `references/archify-routing.md`, locates `archify`, and runs `finalize architecture ... --repo-root ... --quality showcase --json` (or reports fallback if archify is not installed).",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Add a lightweight inline sequence diagram to `README.md` showing the OAuth2 PKCE token exchange.",
+      "expected_output": "Selects Mermaid `sequenceDiagram` (Stage 1: inline README/Markdown; Stage 2: API/auth call chain), loads `references/mermaid-patterns.md`, and outputs clean inline Mermaid without unnecessary .canvas or HTML files.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Visualize the span durations and nested overlap of our checkout request as an HTML waterfall.",
+      "expected_output": "Selects Archify `waterfall` mode (Stage 1 & Stage 2 triggers: span durations/overlap on a common time axis), loads `references/archify-routing.md`, and routes to `archify finalize waterfall ...`.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Validate `evals/files/broken.canvas` and fix any clipping or edge-label collisions.",
+      "expected_output": "Runs `python3 scripts/validate_canvas.py evals/files/broken.canvas`, identifies node-a height clipping (< 188px) and the 100px horizontal gap (< 180px) on edge-1, fixes both, and re-runs until `[PASS]` with exit code 0.",
+      "files": ["evals/files/broken.canvas"]
+    },
+    {
+      "id": 6,
+      "prompt": "Upgrade this 12-table Mermaid erDiagram into a standalone HTML diagram, or turn our incident summary into a one-page explainer.",
+      "expected_output": "Selects Archify (Stage 1: dense >8-table ERD / one-page explainer; Stage 2: `erd` with `--quality standard` first pass or `explainer`), loads `references/archify-routing.md`, and applies the Mermaid-to-Archify mapping.",
+      "files": []
+    }
+  ]
+}
