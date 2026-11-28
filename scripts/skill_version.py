@@ -379,49 +379,77 @@ def cmd_bump(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_tag(args: argparse.Namespace) -> int:
-    repo_root: Path = args.repo_root
-    status_proc = _run_git(repo_root, "status", "--porcelain")
-    if status_proc.returncode != 0:
-        print(f"ERROR: git status failed: {status_proc.stderr.strip()}", file=sys.stderr)
-        return 1
-    if status_proc.stdout.strip():
-        print("ERROR: Working tree is dirty; commit changes before tagging.", file=sys.stderr)
-        return 1
+def _tag_exists(repo_root: Path, tag_name: str, check_remote: bool) -> bool:
+    """Return True if tag exists locally or (when check_remote=True) on origin."""
+    local_proc = _run_git(repo_root, "rev-parse", "-q", "--verify", f"refs/tags/{tag_name}")
+    if local_proc.returncode == 0:
+        return True
+    if not check_remote:
+        return False
 
-    versions, issues = validate_repo(repo_root)
-    if issues:
-        for issue in issues:
-            print(f"ERROR: {issue}", file=sys.stderr)
-        return 1
+    remote_proc = _run_git(
+        repo_root, "ls-remote", "--exit-code", "--tags", "origin", f"refs/tags/{tag_name}"
+    )
+    if remote_proc.returncode == 0:
+        return True
+    if remote_proc.returncode == 2:
+        return False
+    raise RuntimeError(
+        f"Failed to query origin tags for '{tag_name}': {remote_proc.stderr.strip()}"
+    )
 
-    if args.skill not in versions:
-        print(f"ERROR: Unknown skill '{args.skill}'", file=sys.stderr)
-        return 1
 
-    version = versions[args.skill]
-    tag_name = f"{args.skill}/v{version}"
+def _tag_and_release_skill(
+    repo_root: Path,
+    skill_name: str,
+    version: str,
+    changelog_sections: dict[str, str],
+    *,
+    push: bool,
+    release: bool,
+    dry_run: bool,
+    skip_existing: bool,
+) -> str | None:
+    """Create (and optionally push/release) a <skill>/vX.Y.Z tag. Returns error message or None."""
+    tag_name = f"{skill_name}/v{version}"
+    check_remote = push or release or skip_existing
+    try:
+        exists = _tag_exists(repo_root, tag_name, check_remote=check_remote)
+    except RuntimeError as exc:
+        if not (push or release):
+            # Local-only dry-run/tag without an origin remote: fall back to local check.
+            exists = _tag_exists(repo_root, tag_name, check_remote=False)
+        else:
+            return str(exc)
 
-    exists_proc = _run_git(repo_root, "rev-parse", "-q", "--verify", f"refs/tags/{tag_name}")
-    if exists_proc.returncode == 0:
-        print(f"ERROR: Tag '{tag_name}' already exists", file=sys.stderr)
-        return 1
+    if exists:
+        if skip_existing:
+            print(f"SKIP: {tag_name} already exists")
+            return None
+        return f"Tag '{tag_name}' already exists"
 
-    notes = _parse_changelog_sections(repo_root / "CHANGELOG.md").get(tag_name, "")
+    if dry_run:
+        actions = [f"create tag {tag_name}"]
+        if push or release:
+            actions.append("push to origin")
+        if release:
+            actions.append("create GitHub Release")
+        print(f"DRY-RUN: would {', '.join(actions)}")
+        return None
+
     tag_proc = _run_git(repo_root, "tag", "-a", tag_name, "-m", f"Release {tag_name}")
     if tag_proc.returncode != 0:
-        print(f"ERROR: git tag failed: {tag_proc.stderr.strip()}", file=sys.stderr)
-        return 1
+        return f"git tag failed for {tag_name}: {tag_proc.stderr.strip()}"
     print(f"Created tag {tag_name}")
 
-    if args.push or args.release:
+    if push or release:
         push_proc = _run_git(repo_root, "push", "origin", tag_name)
         if push_proc.returncode != 0:
-            print(f"ERROR: git push failed: {push_proc.stderr.strip()}", file=sys.stderr)
-            return 1
+            return f"git push failed for {tag_name}: {push_proc.stderr.strip()}"
         print(f"Pushed tag {tag_name} to origin")
 
-    if args.release:
+    if release:
+        notes = changelog_sections.get(tag_name, "")
         gh_cmd = ["gh", "release", "create", tag_name, "--title", tag_name]
         if notes:
             gh_cmd.extend(["--notes", notes])
@@ -431,9 +459,52 @@ def cmd_tag(args: argparse.Namespace) -> int:
             gh_cmd, cwd=str(repo_root), text=True, capture_output=True, check=False
         )
         if gh_proc.returncode != 0:
-            print(f"ERROR: gh release create failed: {gh_proc.stderr.strip()}", file=sys.stderr)
-            return 1
+            return f"gh release create failed for {tag_name}: {gh_proc.stderr.strip()}"
         print(f"Created GitHub Release for {tag_name}")
+
+    return None
+
+
+def cmd_tag(args: argparse.Namespace) -> int:
+    repo_root: Path = args.repo_root
+    if not args.dry_run:
+        status_proc = _run_git(repo_root, "status", "--porcelain")
+        if status_proc.returncode != 0:
+            print(f"ERROR: git status failed: {status_proc.stderr.strip()}", file=sys.stderr)
+            return 1
+        if status_proc.stdout.strip():
+            print("ERROR: Working tree is dirty; commit changes before tagging.", file=sys.stderr)
+            return 1
+
+    versions, issues = validate_repo(repo_root)
+    if issues:
+        for issue in issues:
+            print(f"ERROR: {issue}", file=sys.stderr)
+        return 1
+
+    if args.all:
+        targets = sorted(versions.keys())
+    else:
+        if args.skill not in versions:
+            print(f"ERROR: Unknown skill '{args.skill}'", file=sys.stderr)
+            return 1
+        targets = [args.skill]
+
+    changelog_sections = _parse_changelog_sections(repo_root / "CHANGELOG.md")
+    for skill_name in targets:
+        err = _tag_and_release_skill(
+            repo_root,
+            skill_name,
+            versions[skill_name],
+            changelog_sections,
+            push=args.push,
+            release=args.release,
+            dry_run=args.dry_run,
+            skip_existing=args.all,
+        )
+        if err:
+            print(f"ERROR: {err}", file=sys.stderr)
+            return 1
 
     return 0
 
@@ -467,13 +538,24 @@ def build_parser() -> argparse.ArgumentParser:
     p_bump.add_argument("--summary", default="", help="Changelog bullet summary for this release.")
     p_bump.set_defaults(func=cmd_bump)
 
-    p_tag = subparsers.add_parser("tag", help="Create an annotated <skill>/vX.Y.Z git tag.")
-    p_tag.add_argument("skill", help="Skill directory name under skills/.")
-    p_tag.add_argument("--push", action="store_true", help="Push the created tag to origin.")
+    p_tag = subparsers.add_parser("tag", help="Create annotated <skill>/vX.Y.Z git tags.")
+    tag_target = p_tag.add_mutually_exclusive_group(required=True)
+    tag_target.add_argument("skill", nargs="?", help="Skill directory name under skills/.")
+    tag_target.add_argument(
+        "--all",
+        action="store_true",
+        help="Tag all skills whose current version is not yet tagged.",
+    )
+    p_tag.add_argument("--push", action="store_true", help="Push created tags to origin.")
     p_tag.add_argument(
         "--release",
         action="store_true",
-        help="Push the tag and create a GitHub Release via gh CLI.",
+        help="Push tags and create GitHub Releases via gh CLI.",
+    )
+    p_tag.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Print planned tag/release actions without mutating git or GitHub.",
     )
     p_tag.set_defaults(func=cmd_tag)
 
