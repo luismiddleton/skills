@@ -39,7 +39,7 @@ Useful options and management commands:
 - `-y` — skip confirmation prompts
 - `npx skills ls [-g]` / `npx skills update [-g]` / `npx skills remove [-g] <skill>` — list, update, or remove installed skills
 
-### Manual Copy (No Node.js)
+### Manual Copy
 
 Copy any skill directory directly into your project or global agent skills folder:
 
