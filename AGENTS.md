@@ -9,8 +9,8 @@ Guidance for authoring, evaluating, and maintaining [Agent Skills](https://agent
 
 ## Evaluation & Critique Rule (Mandatory)
 
-> **Always use a sub-agent when evaluating against best practices.**
-> Whenever evaluating a skill (or changes to a skill or `AGENTS.md`) against best practices, spawn a dedicated sub-agent with fresh context to perform the critique. Do not rely solely on self-review.
+> **Use a sub-agent critique only when creating a new skill or modifying an existing skill (`skills/<skill-name>/`).**
+> Do not run a sub-agent critique for anything else (e.g., changes to `AGENTS.md`, `docs/`, or `README.md`). When creating or modifying a skill, spawn a dedicated sub-agent with fresh context to perform the critique rather than relying on self-review.
 
 The critique sub-agent must load the relevant `docs/*.md` files before auditing and check: specification compliance, progressive disclosure & size budgets, description trigger precision/negative boundaries, script determinism/hygiene, and eval coverage.
 
