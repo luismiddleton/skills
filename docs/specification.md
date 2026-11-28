@@ -1,6 +1,6 @@
 # Specification & Best Practices
 
-Reference for the [Agent Skills specification](https://agentskills.io/home) and structural best practices.
+Reference for the [Agent Skills specification](https://agentskills.io/specification.md) and [best practices](https://agentskills.io/skill-creation/best-practices.md).
 
 ## Directory Layout
 
@@ -39,3 +39,9 @@ Reference for the [Agent Skills specification](https://agentskills.io/home) and 
   - Add a **Table of Contents** at the top of any reference file exceeding **100 lines**.
   - State explicit conditional triggers in `SKILL.md` for when to read each reference (e.g., *"Read `references/harness-patterns.md` when tailoring for Codex CLI"*), not vague hints.
 - **Match degrees of freedom to fragility:** Use prose for judgment calls and `scripts/` for deterministic or error-prone steps.
+
+## References
+
+- [Agent Skills Home](https://agentskills.io/home.md)
+- [Specification](https://agentskills.io/specification.md)
+- [Best Practices](https://agentskills.io/skill-creation/best-practices.md)

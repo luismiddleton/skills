@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Guidance for authoring, evaluating, and maintaining [Agent Skills](https://agentskills.io/home) in this repository.
+Guidance for authoring, evaluating, and maintaining [Agent Skills](https://agentskills.io/home.md) in this repository.
 
 ## Repository Layout
 

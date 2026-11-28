@@ -16,3 +16,7 @@ Reference for bundling executable helpers under `scripts/`.
 - **Non-interactive CLI design:** Accept CLI flags/arguments with clear `--help` output; never prompt for interactive `stdin` input (which hangs agent runs).
 - **Explicit exit codes and diagnostics:** Return `0` on success and non-zero (`1`, `2`, etc.) on failure, printing actionable errors to `stderr`/`stdout` so the agent can diagnose and recover.
 - **Avoid library bloat:** Keep each script focused on a single operational bottleneck.
+
+## References
+
+- [Using Scripts](https://agentskills.io/skill-creation/using-scripts.md)

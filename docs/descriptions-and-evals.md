@@ -36,3 +36,8 @@ Use dataset-driven evaluation instead of ad-hoc "vibe-testing":
 - **Grade and benchmark:**
   - Combine deterministic checks (scripts/regex/schema validation) with rubric-based LLM-as-judge grading (`grading.json`, `timing.json`).
   - Aggregate pass rates, token usage, and latency into `benchmark.json`, comparing **with-skill** vs. **without-skill** (or prior versions) to catch regressions.
+
+## References
+
+- [Optimizing Descriptions](https://agentskills.io/skill-creation/optimizing-descriptions.md)
+- [Evaluating Skills](https://agentskills.io/skill-creation/evaluating-skills.md)
