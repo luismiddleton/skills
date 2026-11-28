@@ -9,7 +9,7 @@ description: >-
   better", "why does the model keep ignoring my instructions?").
 metadata:
   author: Luis Middleton
-  version: "1.0"
+  version: "1.0.0"
 ---
 
 # Prompt Crafting

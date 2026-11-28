@@ -11,6 +11,9 @@ description: >-
   HTML explainers. Not for live monitoring dashboards, numeric data
   charts/plots, UI mockups/wireframes, icons/raster images, or knowledge-graph
   audits/vault organization.
+metadata:
+  author: Luis Middleton
+  version: "1.0.0"
 ---
 
 # Diagram Crafting (`diagram-crafting`)

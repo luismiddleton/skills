@@ -21,7 +21,7 @@ Reference for the [Agent Skills specification](https://agentskills.io/specificat
 | `description` | **Yes** | 1–1024 chars, non-empty. States what the skill does and when to trigger it. |
 | `license` | No | License identifier (e.g., `MIT`, `Apache-2.0`) or reference to a bundled license file. |
 | `compatibility` | No | Max 500 chars. Environment requirements (target agents, packages, network access). |
-| `metadata` | No | String-to-string map (e.g., `author`, `version`). |
+| `metadata` | No *(Repo requires `version`)* | String-to-string map. This repo requires `version` as a quoted SemVer string (`"X.Y.Z"`); see [`docs/versioning.md`](versioning.md). |
 | `allowed-tools` | No *(Experimental)* | Space-separated list of pre-approved tools. |
 
 ## Progressive Disclosure

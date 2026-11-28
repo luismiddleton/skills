@@ -4,10 +4,10 @@ A collection of reusable [Agent Skills](https://agentskills.io/) for AI coding a
 
 ## Available Skills
 
-| Skill | Description | Location |
-| :--- | :--- | :--- |
-| `diagram-crafting` | Create, convert, and validate diagrams across Mermaid, Obsidian `.canvas`, and Archify interactive HTML | [`skills/diagram-crafting/`](./skills/diagram-crafting/SKILL.md) |
-| `prompt-crafting` | Craft, critique, and tailor prompts using Antigravity, CRAFT, and harness-specific patterns | [`skills/prompt-crafting/`](./skills/prompt-crafting/SKILL.md) |
+| Skill | Version | Description | Location |
+| :--- | :--- | :--- | :--- |
+| `diagram-crafting` | `1.0.0` | Create, convert, and validate diagrams across Mermaid, Obsidian `.canvas`, and Archify interactive HTML | [`skills/diagram-crafting/`](./skills/diagram-crafting/SKILL.md) |
+| `prompt-crafting` | `1.0.0` | Craft, critique, and tailor prompts using Antigravity, CRAFT, and harness-specific patterns | [`skills/prompt-crafting/`](./skills/prompt-crafting/SKILL.md) |
 
 ## Installing Skills
 
@@ -31,6 +31,9 @@ npx skills add /path/to/skills -g --skill prompt-crafting     # global scope
 
 # Install all skills non-interactively for all detected agents
 npx skills add luismiddleton/skills -g --all
+
+# Pin a specific released version (quote the URL because tags contain '/')
+npx skills add "https://github.com/luismiddleton/skills/tree/prompt-crafting/v1.0.0/skills/prompt-crafting"
 ```
 
 Useful options and management commands:

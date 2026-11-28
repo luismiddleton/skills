@@ -1,0 +1,30 @@
+name: Validate Skills
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: ${{ github.event_name == 'pull_request' && 0 || 1 }}
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Run versioning unit tests
+        run: uv run --with pyyaml python3 -m unittest discover -s tests -v
+
+      - name: Validate skills and version bumps
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            uv run scripts/skill_version.py validate --base-ref "origin/${{ github.base_ref }}"
+          else
+            uv run scripts/skill_version.py validate
+          fi
