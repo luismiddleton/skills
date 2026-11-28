@@ -38,9 +38,13 @@ uv run scripts/skill_version.py bump prompt-crafting patch --summary "Expand tri
 # 2. Validate all skills (pass --base-ref origin/main to check PR bump requirements)
 uv run scripts/skill_version.py validate --base-ref origin/main
 
-# 3. After merging to main, create (and optionally push/release) the git tag
-uv run scripts/skill_version.py tag prompt-crafting --push --release
+# 3. After merging to main, GitHub Actions automatically tags and releases any pending versions.
+#    Manual / local fallback (or preview with --dry-run):
+uv run scripts/skill_version.py tag --all --dry-run
+uv run scripts/skill_version.py tag prompt-crafting --release
 ```
+
+On merge to `main` (or manual `workflow_dispatch`), [`validate-skills.yml`](../.github/workflows/validate-skills.yml) runs `uv run scripts/skill_version.py tag --all --release` after `validate` passes, creating annotated `<skill-name>/vX.Y.Z` tags and GitHub Releases for any skill versions not yet tagged on `origin`.
 
 ## Pinning Versions (`npx skills`)
 

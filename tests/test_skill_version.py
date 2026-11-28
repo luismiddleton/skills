@@ -171,6 +171,59 @@ class SkillVersionTests(unittest.TestCase):
             ).stdout.splitlines()
             self.assertEqual(tags, ["alpha-skill/v1.0.0"])
 
+    def test_tag_all_is_idempotent_with_remote_origin(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            remote = base / "origin.git"
+            root = base / "repo"
+            root.mkdir()
+            subprocess.run(["git", "init", "--bare", str(remote)], check=True, capture_output=True)
+
+            _init_sample_repo(root)
+            _git(root, "init", "-b", "main")
+            _git(root, "config", "user.name", "Test")
+            _git(root, "config", "user.email", "test@example.com")
+            _git(root, "remote", "add", "origin", str(remote))
+            _git(root, "add", ".")
+            _git(root, "commit", "-m", "chore: initial")
+            _git(root, "push", "-u", "origin", "main")
+
+            # Dry-run should not create local or remote tags.
+            rc = skill_version.main(["--repo-root", str(root), "tag", "--all", "--push", "--dry-run"])
+            self.assertEqual(rc, 0)
+            remote_tags = subprocess.run(
+                ["git", "--git-dir", str(remote), "tag", "-l"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.splitlines()
+            self.assertEqual(remote_tags, [])
+
+            # First real run pushes alpha-skill/v1.0.0.
+            rc = skill_version.main(["--repo-root", str(root), "tag", "--all", "--push"])
+            self.assertEqual(rc, 0)
+            remote_tags = subprocess.run(
+                ["git", "--git-dir", str(remote), "tag", "-l"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.splitlines()
+            self.assertEqual(remote_tags, ["alpha-skill/v1.0.0"])
+
+            # Delete local tag to verify remote ls-remote check keeps re-runs idempotent.
+            _git(root, "tag", "-d", "alpha-skill/v1.0.0")
+            rc = skill_version.main(["--repo-root", str(root), "tag", "--all", "--push"])
+            self.assertEqual(rc, 0)
+
+    def test_tag_rejects_missing_or_conflicting_target(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            _init_sample_repo(root)
+            with self.assertRaises(SystemExit):
+                skill_version.main(["--repo-root", str(root), "tag"])
+            with self.assertRaises(SystemExit):
+                skill_version.main(["--repo-root", str(root), "tag", "alpha-skill", "--all"])
+
 
 if __name__ == "__main__":
     unittest.main()
